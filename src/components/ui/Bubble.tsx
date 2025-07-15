@@ -4,17 +4,18 @@ import useMeasure from "react-use-measure";
 
 interface BubbleProps {
   state: "hidden" | "icon" | "suggesting";
+  onAnimationComplete?: () => void;
 }
 
-export function Bubble({ state }: BubbleProps) {
+export function Bubble({ state, onAnimationComplete }: BubbleProps) {
   const [ref, bounds] = useMeasure();
 
   const variants: Variants = {
     hidden: {
       opacity: 0,
       scale: 0.1,
-      width: 36,
-      height: 36,
+      width: 38,
+      height: 38,
       transformOrigin: "bottom",
       transition: {
         duration: 0.15,
@@ -24,8 +25,8 @@ export function Bubble({ state }: BubbleProps) {
     icon: {
       opacity: 1,
       scale: 1,
-      width: 36,
-      height: 36,
+      width: 38,
+      height: 38,
       transformOrigin: "bottom-center",
       transition: {
         duration: 0.3,
@@ -35,8 +36,8 @@ export function Bubble({ state }: BubbleProps) {
     suggesting: {
       opacity: 1,
       scale: 1,
-      width: bounds.width || 36,
-      height: 36,
+      width: bounds.width || 38,
+      height: 38,
       transformOrigin: "bottom-center",
       transition: {
         duration: 0.3,
@@ -48,7 +49,7 @@ export function Bubble({ state }: BubbleProps) {
   return (
     <>
       <motion.div
-        className="bg-black rounded-full ml-[-15px] -mb-1 flex items-center justify-start overflow-hidden"
+        className="bg-stone-900 rounded-full ml-[-16px] -mb-1 flex items-center justify-start overflow-hidden"
         style={{
           boxShadow: "0 0 2px 0 rgba(0,0,0,0.15)",
         }}
@@ -56,12 +57,13 @@ export function Bubble({ state }: BubbleProps) {
         role="presentation"
         variants={variants}
         animate={state}
+        onAnimationComplete={onAnimationComplete}
       >
         <div ref={ref} className="flex items-center justify-start">
-          <div className="w-[30px] h-[30px] bg-white rounded-full ml-[3px]" />
+          <div className="w-[30px] h-[30px] bg-stone-100 rounded-full ml-1" />
 
           <span
-            className="text-white pl-1.5 pr-3 py-1 text-lg font-medium whitespace-nowrap"
+            className="text-stone-100 pl-1.5 pr-3 py-1 text-lg font-medium whitespace-nowrap"
             style={{
               opacity: state === "suggesting" ? 1 : 0,
             }}

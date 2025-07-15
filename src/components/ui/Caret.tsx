@@ -1,5 +1,5 @@
 import { motion, useAnimationControls } from "motion/react";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { Bubble } from "./Bubble";
 
@@ -9,11 +9,42 @@ interface CaretProps {
 
 export function Caret({ bubbleState }: CaretProps) {
   const controls = useAnimationControls();
-  const isBlinking = bubbleState === "hidden";
+  const [internalState, setInternalState] = useState<
+    "hidden" | "icon" | "suggesting"
+  >(bubbleState);
+  const isTransitioning = useRef(false);
+
+  const isBlinking = internalState === "hidden";
+
+  // Handle state transitions with intermediate steps
+  useEffect(() => {
+    if (bubbleState === internalState || isTransitioning.current) {
+      return;
+    }
+
+    const needsIntermediateTransition =
+      (internalState === "hidden" && bubbleState === "suggesting") ||
+      (internalState === "suggesting" && bubbleState === "hidden");
+
+    if (needsIntermediateTransition) {
+      isTransitioning.current = true;
+      setInternalState("icon");
+    } else {
+      setInternalState(bubbleState);
+    }
+  }, [bubbleState, internalState]);
+
+  const handleAnimationComplete = () => {
+    if (isTransitioning.current) {
+      // Complete the transition to the target state
+      setInternalState(bubbleState);
+      isTransitioning.current = false;
+    }
+  };
 
   useEffect(() => {
     const animateBlinking = async () => {
-      while (isBlinking) {
+      while (isBlinking && !isTransitioning.current) {
         await controls.start({
           opacity: 0,
           transition: {
@@ -21,7 +52,7 @@ export function Caret({ bubbleState }: CaretProps) {
             ease: [0.455, 0.03, 0.515, 0.955], // ease-in-out-quad
           },
         });
-        if (!isBlinking) break;
+        if (!isBlinking || isTransitioning.current) break;
         await controls.start({
           opacity: 1,
           transition: {
@@ -48,10 +79,13 @@ export function Caret({ bubbleState }: CaretProps) {
   return (
     <>
       <div className="flex flex-col items-start">
-        <Bubble state={bubbleState} />
+        <Bubble
+          state={internalState}
+          onAnimationComplete={handleAnimationComplete}
+        />
 
         <motion.div
-          className="w-1 h-14 bg-black rounded-full"
+          className="w-1 h-14 bg-stone-900 rounded-full"
           style={{
             margin: "0 auto 0 0",
             boxShadow: "0 0 2px 0 rgba(0,0,0,0.15)",

@@ -11,8 +11,10 @@ function App() {
   return (
     <>
       <div className="flex flex-col justify-center items-start h-screen gap-4">
-        <div className="flex items-end gap-2">
-          <span className="text-md">Hello world, </span>
+        <div className="flex items-end gap-0.5">
+          <span className="text-6xl font-light text-stone-800">
+            Hello world{" "}
+          </span>
           <Caret bubbleState={bubbleState} />
         </div>
         <div className="flex items-start gap-2">
