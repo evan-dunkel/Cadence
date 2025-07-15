@@ -13,8 +13,8 @@ function App() {
     <>
       <div className="flex flex-col justify-between items-start h-screen">
         <div className="flex-1 flex flex-col justify-center gap-8 pl-12 py-6">
-          <div className="flex items-end gap-0.5">
-            <span className="text-6xl font-light text-stone-800">
+          <div className="flex items-end gap-0.5 scale-75 sm:scale-100 origin-left">
+            <span className="text-6xl font-light text-stone-800 whitespace-nowrap">
               Hello world{" "}
             </span>
             <Caret bubbleState={bubbleState} />

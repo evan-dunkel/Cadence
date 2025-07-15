@@ -13,6 +13,19 @@ export function Bubble({ state, onAnimationComplete }: BubbleProps) {
   const [ref, bounds] = useMeasure();
   const [measureKey, setMeasureKey] = useState(0);
 
+  // Check if we're on mobile (where scale-75 is applied)
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640); // sm breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   useEffect(() => {
     if (state === "suggesting") {
       setMeasureKey((prev) => prev + 1);
@@ -56,7 +69,11 @@ export function Bubble({ state, onAnimationComplete }: BubbleProps) {
     suggesting: {
       opacity: 1,
       scale: 1,
-      width: bounds.width || 38,
+      width: bounds.width
+        ? isMobile
+          ? bounds.width / 0.75
+          : bounds.width
+        : 38,
       height: 38,
       transformOrigin: "bottom-center",
       transition: {
@@ -76,6 +93,7 @@ export function Bubble({ state, onAnimationComplete }: BubbleProps) {
         aria-label="Suggestion bubble"
         role="presentation"
         variants={variants}
+        initial={false}
         animate={state}
         onAnimationComplete={onAnimationComplete}
       >
