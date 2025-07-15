@@ -6,21 +6,29 @@ import { useEffect, useState } from "react";
 interface BubbleProps {
   state: "hidden" | "icon" | "suggesting";
   onAnimationComplete?: () => void;
+  zIndex?: number;
 }
 
 export function Bubble({ state, onAnimationComplete }: BubbleProps) {
   const [ref, bounds] = useMeasure();
-  const [forceRemeasure, setForceRemeasure] = useState(0);
+  const [measureKey, setMeasureKey] = useState(0);
 
-  // Force re-measurement when window resizes
+  useEffect(() => {
+    if (state === "suggesting") {
+      setMeasureKey((prev) => prev + 1);
+    }
+  }, [state]);
+
   useEffect(() => {
     const handleResize = () => {
-      setForceRemeasure((prev) => prev + 1);
+      if (state === "suggesting") {
+        setMeasureKey((prev) => prev + 1);
+      }
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [state]);
 
   const variants: Variants = {
     hidden: {
@@ -61,7 +69,6 @@ export function Bubble({ state, onAnimationComplete }: BubbleProps) {
   return (
     <>
       <motion.div
-        key={`bubble-${forceRemeasure}`}
         className="bg-stone-900 rounded-full -mb-1 flex items-center overflow-hidden relative ml-[-16px]"
         style={{
           boxShadow: "0 0 2px 0 rgba(0,0,0,0.15)",
@@ -82,6 +89,7 @@ export function Bubble({ state, onAnimationComplete }: BubbleProps) {
 
         <div
           ref={ref}
+          key={`content-${measureKey}`}
           className="flex items-center justify-start"
           style={{
             opacity: state === "suggesting" ? 1 : 0,

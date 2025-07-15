@@ -79,11 +79,12 @@ export function Caret({ bubbleState }: CaretProps) {
   return (
     <>
       <div className="flex flex-col items-start">
-        <Bubble
-          state={internalState}
-          onAnimationComplete={handleAnimationComplete}
-        />
-
+        <div className="z-10">
+          <Bubble
+            state={internalState}
+            onAnimationComplete={handleAnimationComplete}
+          />
+        </div>
         <motion.div
           className="w-1 h-14 bg-stone-900 rounded-full"
           style={{
