@@ -13,7 +13,6 @@ Created by [Evan Dunkel](https://evandunkel.com/cadence)
 - **React** + **TypeScript** + **Vite** for rapid development
 - **Tailwind CSS** for styling
 - **Framer Motion** for animations (following flow-state preserving animation principles)
-- **BERTopic** for topic segmentation and contextual suggestions
 
 ## Future Concept Development
 
