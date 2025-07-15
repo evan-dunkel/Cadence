@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import type { Variants } from "motion/react";
 import useMeasure from "react-use-measure";
+import { useEffect, useState } from "react";
 
 interface BubbleProps {
   state: "hidden" | "icon" | "suggesting";
@@ -9,6 +10,17 @@ interface BubbleProps {
 
 export function Bubble({ state, onAnimationComplete }: BubbleProps) {
   const [ref, bounds] = useMeasure();
+  const [forceRemeasure, setForceRemeasure] = useState(0);
+
+  // Force re-measurement when window resizes
+  useEffect(() => {
+    const handleResize = () => {
+      setForceRemeasure((prev) => prev + 1);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const variants: Variants = {
     hidden: {
@@ -49,6 +61,7 @@ export function Bubble({ state, onAnimationComplete }: BubbleProps) {
   return (
     <>
       <motion.div
+        key={`bubble-${forceRemeasure}`}
         className="bg-stone-900 rounded-full -mb-1 flex items-center overflow-hidden relative ml-[-16px]"
         style={{
           boxShadow: "0 0 2px 0 rgba(0,0,0,0.15)",
