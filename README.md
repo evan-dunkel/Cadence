@@ -15,7 +15,7 @@ Created by [Evan Dunkel](https://evandunkel.com/cadence)
 - **Framer Motion** for animations (following flow-state preserving animation principles)
 - **BERTopic** for topic segmentation and contextual suggestions
 
-## Key Implementation Features
+## Future Concept Development
 
 ### Natural Pause Detection
 
