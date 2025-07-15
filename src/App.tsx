@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { Caret } from "./components/Caret";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 
 function App() {
