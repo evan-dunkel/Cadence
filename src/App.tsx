@@ -38,7 +38,7 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="self-start pl-2 pb-2sm:pl-6 sm:pb-4">
+        <div className="self-start pl-2 pb-2 sm:pl-6 sm:pb-4">
           <span className="text-sm text-stone-500">
             Created by Evan Dunkel. Proof of concept UX for{" "}
             <a
