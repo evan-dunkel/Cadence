@@ -49,7 +49,7 @@ export function Bubble({ state, onAnimationComplete }: BubbleProps) {
   return (
     <>
       <motion.div
-        className="bg-stone-900 rounded-full ml-[-16px] -mb-1 flex items-center justify-start overflow-hidden"
+        className="bg-stone-900 rounded-full -mb-1 flex items-center overflow-hidden relative ml-[-16px]"
         style={{
           boxShadow: "0 0 2px 0 rgba(0,0,0,0.15)",
         }}
@@ -59,15 +59,23 @@ export function Bubble({ state, onAnimationComplete }: BubbleProps) {
         animate={state}
         onAnimationComplete={onAnimationComplete}
       >
-        <div ref={ref} className="flex items-center justify-start">
-          <div className="w-[30px] h-[30px] bg-stone-100 rounded-full ml-1" />
+        <div
+          className="w-[30px] h-[30px] bg-stone-100 rounded-full absolute left-1"
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
+        />
 
-          <span
-            className="text-stone-100 pl-1.5 pr-3 py-1 text-lg font-medium whitespace-nowrap"
-            style={{
-              opacity: state === "suggesting" ? 1 : 0,
-            }}
-          >
+        <div
+          ref={ref}
+          className="flex items-center justify-start"
+          style={{
+            opacity: state === "suggesting" ? 1 : 0,
+          }}
+        >
+          <div className="w-[30px] h-[30px] flex-shrink-0" />
+          <span className="text-stone-100 pl-2.5 pr-3.5 py-1 text-lg font-medium whitespace-nowrap">
             Suggestion
           </span>
         </div>

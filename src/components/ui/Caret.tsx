@@ -87,7 +87,6 @@ export function Caret({ bubbleState }: CaretProps) {
         <motion.div
           className="w-1 h-14 bg-stone-900 rounded-full"
           style={{
-            margin: "0 auto 0 0",
             boxShadow: "0 0 2px 0 rgba(0,0,0,0.15)",
           }}
           animate={controls}

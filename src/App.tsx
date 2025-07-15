@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-start h-screen gap-4">
+      <div className="flex flex-col justify-center items-start h-screen gap-4 pl-12">
         <div className="flex items-end gap-0.5">
           <span className="text-6xl font-light text-stone-800">
             Hello world{" "}
