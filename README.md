@@ -1,69 +1,83 @@
-# React + TypeScript + Vite
+# Cadence
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Ambient AI that protects flow state**
 
-Currently, two official plugins are available:
+Cadence is an experimental interface exploring how AI can assist creative work without interrupting cognitive flow. Instead of traditional chat-based interactions that demand immediate context, Cadence observes natural pause points (~10 seconds) and offers brief, contextual suggestions that users can ignore or engage with seamlessly.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+_This project represents my exploration into React development, combining UX research insights with modern web technologies to solve real problems in creative workflows._
 
-## Expanding the ESLint configuration
+Created by [Evan Dunkel](https://evandunkel.com/cadence)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Technical Stack
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React** + **TypeScript** + **Vite** for rapid development
+- **Tailwind CSS** for styling
+- **Framer Motion** for animations (following flow-state preserving animation principles)
+- **BERTopic** for topic segmentation and contextual suggestions
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Key Implementation Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Natural Pause Detection
+
+- 10-second heuristic for detecting writing pauses
+- Topic transition analysis using BERTopic
+- Non-intrusive suggestion timing
+
+### Ambient Interface
+
+- Minimal UI that stays out of the way
+- Contextual suggestions appear without breaking focus
+- One-click expansion for deeper assistance
+
+### Research Integration
+
+- Pull content from external sources (Reminders, notes)
+- Manual search tuning capabilities
+- Idea staging and combination workflows
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Run tests
+npm test
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Animation Guidelines
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Following principles for maintaining flow state:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Animations default to 0.2-0.3s duration
+- Use `ease-out` for entering elements
+- Respect `prefers-reduced-motion` for accessibility
+- Hardware-accelerated transforms for smooth interactions
+
+## Project Structure
+
 ```
+src/
+├── components/        # UI components
+│   ├── Bubble.tsx    # Suggestion bubble interface
+│   ├── Caret.tsx     # Text cursor indicators
+│   └── ui/           # Shared UI components
+├── lib/              # Utilities and helpers
+└── main.tsx          # Application entry point
+```
+
+## Core Principles
+
+1. **Respect cognitive flow** - Wait for natural pauses
+2. **Suggest, don't interrupt** - Passive suggestions over active interruptions
+3. **Match user pace** - Adapt to individual working rhythms
+
+---
+
+_Learn more at [evandunkel.com/cadence](https://evandunkel.com/cadence)_
