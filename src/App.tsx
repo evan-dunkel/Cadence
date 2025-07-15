@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col justify-between items-start h-screen">
+      <div className="flex flex-col justify-between items-start h-screen overflow-x-hidden">
         <div className="flex-1 flex flex-col justify-center gap-8 pl-12 py-6">
           <div className="flex items-end gap-0.5 scale-75 sm:scale-100 origin-left">
             <span className="text-6xl font-light text-stone-800 whitespace-nowrap">
@@ -38,7 +38,7 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="self-start pl-6 pb-4">
+        <div className="self-start pl-2 pb-2sm:pl-6 sm:pb-4">
           <span className="text-sm text-stone-500">
             Created by Evan Dunkel. Proof of concept UX for{" "}
             <a
