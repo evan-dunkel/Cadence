@@ -48,7 +48,7 @@ export function Bubble({ state }: BubbleProps) {
   return (
     <>
       <motion.div
-        className="bg-black rounded-full -mb-1 flex items-center justify-start overflow-hidden"
+        className="bg-black rounded-full ml-[-15px] -mb-1 flex items-center justify-start overflow-hidden"
         style={{
           boxShadow: "0 0 2px 0 rgba(0,0,0,0.15)",
         }}
@@ -61,7 +61,7 @@ export function Bubble({ state }: BubbleProps) {
           <div className="w-[30px] h-[30px] bg-white rounded-full ml-[3px]" />
 
           <span
-            className="text-white px-3 py-1 text-lg font-medium whitespace-nowrap"
+            className="text-white pl-1.5 pr-3 py-1 text-lg font-medium whitespace-nowrap"
             style={{
               opacity: state === "suggesting" ? 1 : 0,
             }}
